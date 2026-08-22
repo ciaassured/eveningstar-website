@@ -711,10 +711,6 @@
   visibility: hidden;
   pointer-events: none;
   transform: translate3d(0, 14px, 0);
-  transition:
-    opacity 0.28s ease,
-    transform 0.28s ease,
-    visibility 0.28s ease;
 }
 
 .inspection-control-panel[data-visible="true"] {
