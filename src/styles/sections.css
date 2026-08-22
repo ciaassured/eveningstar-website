@@ -4,6 +4,7 @@
   left: 36px;
   z-index: 4;
   width: 46px;
+  min-height: 1em;
   font-family: var(--font-display);
   font-size: 1rem;
   font-variation-settings:
@@ -40,8 +41,7 @@
   transition:
     border-color 0.2s ease,
     background-color 0.2s ease,
-    box-shadow 0.2s ease,
-    transform 0.2s ease;
+    box-shadow 0.2s ease;
 }
 
 .social-links__button:nth-child(2) .social-links__icon {
@@ -111,13 +111,10 @@
   opacity: 0;
   pointer-events: none;
   transform: translate3d(-12px, -50%, 0);
-  transition:
-    opacity 0.2s ease,
-    transform 0.2s ease;
 }
 
 .social-links__button:hover .social-links__label,
-.social-links__button:focus-visible .social-links__label {
+.social-links__button:focus .social-links__label {
   opacity: 1;
   transform: translate3d(0, -50%, 0);
 }

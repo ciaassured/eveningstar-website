@@ -15,6 +15,7 @@ import {
 import type { EveningStarVariant } from '../variants';
 
 const environmentUrl = assetPath('hdr/aircraft_workshop_01_1k.hdr');
+const dracoDecoderPath = assetPath('draco/');
 
 type ExperienceCanvasProps = {
   flipped: boolean;
@@ -83,7 +84,7 @@ function BoardModel({
 }) {
   const motion = useRef<Group>(null);
   const flipMotion = useRef<Group>(null);
-  const gltf = useGLTF(modelUrl);
+  const gltf = useGLTF(modelUrl, dracoDecoderPath);
   const { size } = useThree();
   const targetPosition = useRef(new Vector3());
   const flipRotation = useRef(new Vector3());
