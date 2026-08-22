@@ -1,10 +1,8 @@
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
-const githubPagesBase = '/eveningstar-wesbite/';
-
 export default defineConfig({
-  base: process.env.GITHUB_ACTIONS === 'true' ? githubPagesBase : '/',
+  base: '/',
   plugins: [react()],
   build: {
     assetsInlineLimit: 4096,

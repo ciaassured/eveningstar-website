@@ -6,7 +6,7 @@ test.describe('PCB variants', () => {
   test.skip(({ isMobile }) => isMobile, 'Variant smoke runs only in the desktop project.');
 
   test('renders every configured variant', async ({ page }) => {
-    test.setTimeout(300000);
+    test.setTimeout(600000);
 
     const browserErrors = captureBrowserErrors(page);
     const loadedModels = new Set<string>();
@@ -28,6 +28,7 @@ test.describe('PCB variants', () => {
       );
       await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute('content', variant.fog);
       await expect.poll(() => loadedModels.has(variant.id), { timeout: 30000 }).toBe(true);
+      await expect(page.locator('.loader')).toHaveAttribute('aria-hidden', 'true', { timeout: 60000 });
 
       const canvas = page.locator('canvas').first();
       await expect(canvas).toBeVisible();

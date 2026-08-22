@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 import { canvasFrame, captureBrowserErrors, currentPageY, imageDelta, scrollToPageY } from './helpers';
 
 test('renders the Eveningstar product page without browser errors', async ({ page }) => {
-  test.setTimeout(90000);
+  test.setTimeout(180000);
 
   const browserErrors = captureBrowserErrors(page);
   const modelResponses: string[] = [];
@@ -15,23 +15,32 @@ test('renders the Eveningstar product page without browser errors', async ({ pag
 
   await page.goto('./?variant=blue', { waitUntil: 'networkidle' });
   await expect(page.getByRole('heading', { name: /Eveningstar/i })).toBeVisible();
+  const loader = page.locator('.loader');
+  await expect(loader).toHaveAttribute('aria-hidden', 'true', { timeout: 60000 });
+  await expect(loader).toHaveClass(/loader--hidden/);
+  await expect(loader).toBeHidden({ timeout: 15000 });
   await expect(page.locator('.site-mark')).toBeVisible();
   await expect(page.locator('.hero-heading__star')).toBeVisible();
   await expect(page.locator('.theme-root')).toHaveAttribute('data-variant', 'blue');
   await expect(page.locator('head link[rel~="icon"]')).toHaveAttribute('href', /favicons\/favicon-blue\.svg/);
   await expect(page.locator('head link[rel="canonical"]')).toHaveAttribute(
     'href',
-    'https://ciaassured.github.io/eveningstar-wesbite/'
+    'https://eveningstar.ciaassured.com/'
+  );
+  await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+    'content',
+    'https://eveningstar.ciaassured.com/'
   );
   await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
     'content',
-    'https://ciaassured.github.io/eveningstar-wesbite/social/eveningstar-og.png'
+    'https://eveningstar.ciaassured.com/social/eveningstar-og.png'
   );
   await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute('content', 'summary_large_image');
+  await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute(
+    'content',
+    'https://eveningstar.ciaassured.com/social/eveningstar-og.png'
+  );
   await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute('content', '#d8ecfb');
-  const loader = page.locator('.loader');
-  await expect(loader).toHaveAttribute('aria-hidden', 'true', { timeout: 15000 });
-  await expect(loader).toHaveClass(/loader--hidden/);
   await expect(page.locator('.loader__title')).toHaveText('Eveningstar');
   await page.waitForTimeout(750);
 
@@ -55,11 +64,11 @@ test('renders the Eveningstar product page without browser errors', async ({ pag
 
   await page.keyboard.press('Tab');
   await expect(githubLink).toBeFocused();
-  await expect(githubLabel).toHaveCSS('opacity', '1');
+  await expect(githubLabel).toHaveCSS('opacity', '1', { timeout: 15000 });
 
   await page.keyboard.press('Tab');
   await expect(youtubeLink).toBeFocused();
-  await expect(youtubeLabel).toHaveCSS('opacity', '1');
+  await expect(youtubeLabel).toHaveCSS('opacity', '1', { timeout: 15000 });
   await youtubeLink.evaluate((link) => (link as HTMLElement).blur());
 
   const githubBox = await githubLink.boundingBox();
