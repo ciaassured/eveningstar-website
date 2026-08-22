@@ -18,7 +18,7 @@ Single-page Vite/React/Three product display for the Eveningstar PCB. The page c
 
 ## GitHub Actions
 
-- `.github/workflows/ci.yml` runs Biome checks plus production build/browser render checks on pull requests, pushes, and manual dispatches.
+- `.github/workflows/ci.yml` runs Biome checks plus production build/browser render checks on pull requests and pushes to `main`.
 - The same workflow uploads and deploys the GitHub Pages artifact only for pushes to `main` after checks pass.
 
 ## Assets
