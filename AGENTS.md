@@ -12,6 +12,9 @@ Single-page Vite/React/Three product display for the Eveningstar PCB. The page c
 - Biome check: `npx pnpm@11.9.0 lint`
 - Biome format/fix: `npx pnpm@11.9.0 format`
 - Browser check after build: `npx pnpm@11.9.0 test:e2e`
+- Nix development shell: `nix develop`
+- Nix build: `nix build .#website`
+- Nix checks: `nix flake check -L`
 
 ## GitHub Actions
 
@@ -35,7 +38,3 @@ The app picks a random PCB variant on normal page loads. Use `?variant=blue`, `?
 ## Model Path Editing
 
 `src/modelPath.ts` is intentionally structured so a user can tune the scrolling GLB path without digging through rendering code. Keep path stages clearly named and commented, especially for magnetic settle or hold moments. Prefer obvious data edits, such as repeated poses for scroll holds, over hiding motion behavior in separate timelines unless there is a strong reason.
-
-## Deployment
-
-The intended remote is `ciaassured/eveningstar-wesbite`. Keep the repository private until the user asks to make it public.
