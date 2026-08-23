@@ -2,10 +2,32 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Start Vite dev server",
+      "label": "Nix: Setup dependencies",
       "type": "process",
-      "command": "pnpm",
-      "args": ["dev:debug"],
+      "command": "nix",
+      "args": ["run", ".#setup"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Nix: Start Vite dev server",
+      "type": "process",
+      "command": "nix",
+      "args": [
+        "run",
+        ".#dev",
+        "--",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "5173",
+        "--strictPort",
+        "--force",
+        "--clearScreen",
+        "false"
+      ],
       "options": {
         "cwd": "${workspaceFolder}"
       },
@@ -29,6 +51,70 @@
         "panel": "dedicated",
         "clear": true
       }
+    },
+    {
+      "label": "Nix: Format",
+      "type": "process",
+      "command": "nix",
+      "args": ["run", ".#format"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Nix: Refresh pnpm dependency hash",
+      "type": "process",
+      "command": "nix",
+      "args": ["run", ".#update-pnpm-hash"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Nix: Build website",
+      "type": "process",
+      "command": "nix",
+      "args": ["build", ".#website", "-L"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "Nix: Lint",
+      "type": "process",
+      "command": "nix",
+      "args": ["build", ".#lint", "-L"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "group": "test"
+    },
+    {
+      "label": "Nix: End-to-end tests",
+      "type": "process",
+      "command": "nix",
+      "args": ["build", ".#e2e", "-L"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "group": "test"
+    },
+    {
+      "label": "Nix: Full checks",
+      "type": "process",
+      "command": "nix",
+      "args": ["flake", "check", "-L"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "group": "test"
     }
   ]
 }
