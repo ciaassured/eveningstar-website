@@ -8,7 +8,9 @@
       };
     in
     {
-      packages.default = project.website;
-      packages.website = project.website;
+      packages = {
+        default = project.website;
+        inherit (project) e2e lint website;
+      };
     };
 }
