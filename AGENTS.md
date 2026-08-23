@@ -6,14 +6,14 @@ Single-page Vite/React/Three product display for the Eveningstar PCB. The page c
 
 ## Local Commands
 
-- Install: `npx pnpm@11.9.0 install`
-- Dev server: `npx pnpm@11.9.0 dev`
-- Build: `npx pnpm@11.9.0 build`
-- Biome check: `npx pnpm@11.9.0 lint`
-- Biome format/fix: `npx pnpm@11.9.0 format`
-- Browser check after build: `npx pnpm@11.9.0 test:e2e`
 - Nix development shell: `nix develop`
-- Nix build: `nix build .#website`
+- Install dependencies: `nix run .#setup`
+- Dev server: `nix run .#dev -- [Vite options]`
+- Biome format/fix: `nix run .#format`
+- Refresh the Nix pnpm dependency hash: `nix run .#update-pnpm-hash`
+- Nix build: `nix build .#website -L`
+- Biome check: `nix build .#lint -L`
+- Browser check: `nix build .#e2e -L`
 - Nix checks: `nix flake check -L`
 
 ## GitHub Actions
@@ -29,7 +29,7 @@ Single-page Vite/React/Three product display for the Eveningstar PCB. The page c
 
 ## Debugging
 
-VS Code has a Firefox launch configuration named `Debug Eveningstar`. It starts `pnpm dev:debug` through `.vscode/tasks.json`, waits for Vite on `127.0.0.1:5173`, then launches Firefox through the `firefox-devtools.vscode-firefox-debug` extension.
+VS Code has a Firefox launch configuration named `Debug Eveningstar`. It starts `nix run .#dev -- --host 127.0.0.1 --port 5173 --strictPort --force --clearScreen false` through `.vscode/tasks.json`, waits for Vite on `127.0.0.1:5173`, then launches Firefox through the `firefox-devtools.vscode-firefox-debug` extension. The debugger auto-discovers Firefox; developers can override `firefox.executable` in personal settings if necessary.
 
 ## Variants
 
