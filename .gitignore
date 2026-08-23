@@ -5,5 +5,4 @@ test-results
 result
 *.local
 .DS_Store
-.vscode/.vite-debug.pid
 notes.md

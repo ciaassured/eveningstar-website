@@ -9,9 +9,8 @@
       "reloadOnAttach": true,
       "url": "http://127.0.0.1:5173/",
       "webRoot": "${workspaceFolder}",
-      "firefoxExecutable": "/usr/bin/firefox",
       "timeout": 15,
-      "preLaunchTask": "Start Vite dev server",
+      "preLaunchTask": "Nix: Start Vite dev server",
       "pathMappings": [
         {
           "url": "http://127.0.0.1:5173/src/",
