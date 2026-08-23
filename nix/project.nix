@@ -62,7 +62,9 @@ let
       buildInputs = [ pkgs.stdenv.cc.cc.lib ];
 
       preBuild = ''
-        autoPatchelf node_modules/.pnpm/@biomejs+cli-linux-x64@2.5.1/node_modules/@biomejs/cli-linux-x64
+        biomeBinary="$(find node_modules -path '*/@biomejs/cli-linux-x64/biome' -type f -print -quit)"
+        test -n "$biomeBinary"
+        autoPatchelf "$biomeBinary"
       '';
 
       buildPhase = ''
